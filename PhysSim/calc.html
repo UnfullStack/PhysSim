@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8">
+        <!-- load desmos api -->
+        <script src="https://www.desmos.com/api/v1.12/calculator.js?apiKey=e177e7d48f3b4e018f8bb4b0ebc53dd1"></script>
+        <!-- load KaTeX -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.css" integrity="sha384-WwGtaC6ywCHxA5cstpj/3+xIZvTez8dq2IcBQaXRkenHZ7FVVq1ZROtURwfbtTlG" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.js" integrity="sha384-a1WQdjRj162i159OYq041X6I4K8NenkrI09LlPmiHg0YOb7CR+wJOraXwK9abpnE" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+        <!-- div to hold the graph -->
+        <div id="graph" style="width: 900px; height: 500px;"></div>
+        <br>
+        <button onClick="transferVars()">Transfer Variables</button>
+        <!-- form for entering variables -->
+        <form id="vars">
+            <label class="math" for="v_o">v_o</label>
+            <input type="number" name="v_o"></input>
+            <label class="math" for="v_x">v_{x}</label>
+            <input type="number" name="v_x"></input>
+            <label class="math" for="v_oy">v_{oy}</label>
+            <input type="number" name="v_oy" value="0"></input>
+            <br>
+            <label class="math" for="theta">\theta</label>
+            <input type="number" name="theta"></input>
+            <label class="math" for="x">x</label>
+            <input type="number" name="x"></input>
+            <label class="math" for="g">g</label>
+            <input type="number" name="g" value="-9.8"></input>
+            <br>
+            <label class="math" for="t">t</label>
+            <input type="number" name="t"></input>
+            <label class="math" for="v_fy">v_{fy}</label>
+            <input type="number" name="v_fy"></input>
+            <label class="math" for="y_max">y_{max}</label>
+            <input type="number" name="y_max"></input>
+            <br>
+            <label class="math" for="y_o">y_{o}</label>
+            <input type="number" name="y_o"></input>
+        </form>
+        <button>Solve</button>
+    </body>
+
+    <script src="calc.js"></script>
+    <script defer src="render.js"></script>
+</html>
