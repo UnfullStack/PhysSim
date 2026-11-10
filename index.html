@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8">
+        <title>PhysSim</title>
+        <!-- load KaTeX -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.css" integrity="sha384-WwGtaC6ywCHxA5cstpj/3+xIZvTez8dq2IcBQaXRkenHZ7FVVq1ZROtURwfbtTlG" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.js" integrity="sha384-a1WQdjRj162i159OYq041X6I4K8NenkrI09LlPmiHg0YOb7CR+wJOraXwK9abpnE" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+        <iframe src="navbar.html" class="navbar"></iframe>
+        <h1>PhysSim</h1>
+        <h2>This website is meant to trivialize projectile motion by providing a resource for calculation and visualization.</h3>
+        <p>This website was created for a Web Applications assignment in my sophmore year.</p>
+        <h3>Projectile Motion</h3>
+        <p>Projectile motion is a field/problem in physics that involves finding the forces acting upon and the results of a thrown/launched object. An example would be a toy falling off a table, or a player kicking a soccer ball. In the case of this website and most projectile motion problems, the conditions are often "ideal", meaning that things like friction and air resistance are not accounted for, in favor of velocity, acceleration, time, and position.</p>
+        <h3>Website Capabilities</h3>
+        <p>This website takes the following variables into account:</p>
+        <ul>
+            <li class="math">v_o</li>
+            <li class="math">v_x</li>
+            <li class="math">v_{oy}</li>
+            <li class="math">\theta</li>
+            <li class="math">x</li>
+            <li class="math">g</li>
+            <li class="math">t</li>
+            <li class="math">v_{fy}</li>
+            <li class="math">y_{max}</li>
+            <li class="math">y_o</li>
+        </ul>
+        <p>The <a href="calc.html">calculation page</a> also features a graph of position!</p>
+    </body>
+
+    <script defer src="render.js"></script>
+</html>
