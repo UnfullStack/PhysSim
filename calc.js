@@ -132,7 +132,7 @@ function getVar(name) {
         if (box.value) {
             fallback = parseFloat(box.value);
         }
-        // check that the box is not checked. if it is checked, we should pretend this is blank so that we solve for it
+        // check that the box is not checked. if it is checked, we should pretend the entry is blank so that we solve for it
         if (box.value && !document.getElementById("c-"+name).checked) {
             final = box.value;
         } else {
@@ -164,6 +164,10 @@ function getVar(name) {
                 let g = getVar("g")*-1; // gravity is inverted because otherwise the calculations are incorrect. i'm not entirely sure, i've just verified that inverting makes it work
                 let y_o = getVar("y_o");
                 final = (v_oy+Math.sqrt(v_oy**2+2*g*y_o))/g;
+            }
+            if (name == "v_fy") {
+                // v_fy = v_oy + g * t
+                final = getVar("v_oy")+getVar("g")*getVar("t");
             }
         }
     }

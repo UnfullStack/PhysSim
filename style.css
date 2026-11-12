@@ -1,3 +1,41 @@
+/* navbar iframe */
 .navbar {
-    height: 30px;
+    height: 18px;
+    width: 625px;
+    border-color: green;
+}
+
+/* navbar body */
+.internal-navbar {
+    margin-top: 0;
+    margin-left: 0;
+    background-image: none;
+    background-color: darkgreen;
+}
+.internal-navbar a {
+    padding-right: 70px;
+}
+
+/* utilities */
+.x-no-scroll {
+    overflow-x: hidden;
+}
+.y-no-scroll {
+    overflow-y: hidden;
+}
+
+.title {
+    font-size: 4em;
+}
+
+body {
+    background-image: url("assets/bg.png");
+    background-repeat: repeat;
+    background-size: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+a {
+    color: lightgreen;
 }
