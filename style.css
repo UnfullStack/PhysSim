@@ -24,10 +24,12 @@
     overflow-y: hidden;
 }
 
+/* title */
 .title {
     font-size: 4em;
 }
 
+/* body */
 body {
     background-image: url("assets/bg.png");
     background-repeat: repeat;
@@ -36,6 +38,28 @@ body {
     color: white;
 }
 
+/* anchors/links */
 a {
     color: lightgreen;
+    transition: .2s ease-in-out;
+}
+
+a:hover {
+    color: rgb(223, 255, 220);
+}
+
+/* graph */
+#graph {
+    width: 98%;
+    height: 600px;
+    border-color: lightgreen;
+    border-style: solid;
+    border-width: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#vars label {
+    min-width: 40px;
+    display: inline-block;
 }
