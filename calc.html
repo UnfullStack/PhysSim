@@ -14,60 +14,63 @@
     <body>
         <iframe src="navbar.html" class="navbar"></iframe>
         <h1>Calculator</h1>
-        <!-- div to hold the graph -->
-        <div id="graph"></div>
-        <br>
-        <button onClick="transferVars()">Transfer Variables</button>
-        <p>Anything you leave blank will automatically be calculated. (If possible)<br>If something is not blank but you still want to calculate it, check the box next to it.</p>
-        <!-- form for entering variables -->
-        <!-- i didn't want to have to line break each one, but flex boxes are hard :( -->
-        <form id="vars">
-            <label class="math" for="v_o">v_o</label>
-            <input type="number" name="v_o"></input>
-            <input type="checkbox" for="v_o" id="c-v_o"></input>
-            <br>
-            <label class="math" for="v_x">v_x</label>
-            <input type="number" name="v_x"></input>
-            <input type="checkbox" for="v_x" id="c-v_x"></input>
-            <br>
-            <label class="math" for="v_oy">v_{oy}</label>
-            <input type="number" name="v_oy"></input>
-            <input type="checkbox" for="v_oy" id="c-v_oy"></input>
-            <br>
-            <label class="math" for="\theta">\theta</label>
-            <input type="number" name="\theta"></input>
-            <input type="checkbox" for="\theta" id="c-\theta"></input>
-            <br>
-            <label class="math" for="x">x</label>
-            <input type="number" name="x"></input>
-            <input type="checkbox" for="x" id="c-x"></input>
-            <br>
-            <label class="math" for="g">g</label>
-            <input type="number" name="g" value="-9.8"></input>
-            <input type="checkbox" for="g" id="c-g"></input>
-            <br>
-            <label class="math" for="t">t</label>
-            <input type="number" name="t"></input>
-            <input type="checkbox" for="t" id="c-t"></input>
-            <br>
-            <label class="math" for="v_fy">v_{fy}</label>
-            <input type="number" name="v_fy"></input>
-            <input type="checkbox" for="v_fy" id="c-v_fy"></input>
-            <br>
-            <label class="math" for="y_max">y_{max}</label>
-            <input type="number" name="y_max"></input>
-            <input type="checkbox" for="y_max" id="c-y_max"></input>
-            <br>
-            <label class="math" for="y_o">y_{o}</label>
-            <input type="number" name="y_o" value="0"></input>
-            <input type="checkbox" for="y_o" id="c-y_o"></input>
-        </form>
-        <br>
-        <button onClick="solveVars()">Solve</button>
-        <br>
-        <br>
-        <button onclick="clearVars()" id="btnClear"></button>
-        <button onClick="cancelClearVars()" id="btnCancelClear" hidden>Cancel</button>
+        <div class="calc-div">
+            <!-- div to hold the graph -->
+            <div id="graph"></div>
+            <div class="calc-entry">
+                <button onClick="transferVars()">Transfer Variables</button>
+                <p>Anything you leave blank will automatically be calculated. (If possible)<br>If something is not blank but you still want to calculate it, check the box next to it.</p>
+                <!-- form for entering variables -->
+                <!-- i didn't want to have to line break each one, but flex boxes are hard :( -->
+                <form id="vars">
+                    <label class="math" for="v_o">v_o</label>
+                    <input type="number" name="v_o"></input>
+                    <input type="checkbox" for="v_o" id="c-v_o"></input>
+                    <br>
+                    <label class="math" for="v_x">v_x</label>
+                    <input type="number" name="v_x"></input>
+                    <input type="checkbox" for="v_x" id="c-v_x"></input>
+                    <br>
+                    <label class="math" for="v_oy">v_{oy}</label>
+                    <input type="number" name="v_oy"></input>
+                    <input type="checkbox" for="v_oy" id="c-v_oy"></input>
+                    <br>
+                    <label class="math" for="\theta">\theta</label>
+                    <input type="number" name="\theta"></input>
+                    <input type="checkbox" for="\theta" id="c-\theta"></input>
+                    <br>
+                    <label class="math" for="x">x</label>
+                    <input type="number" name="x"></input>
+                    <input type="checkbox" for="x" id="c-x"></input>
+                    <br>
+                    <label class="math" for="g">g</label>
+                    <input type="number" name="g" value="-9.8"></input>
+                    <input type="checkbox" for="g" id="c-g"></input>
+                    <br>
+                    <label class="math" for="t">t</label>
+                    <input type="number" name="t"></input>
+                    <input type="checkbox" for="t" id="c-t"></input>
+                    <br>
+                    <label class="math" for="v_fy">v_{fy}</label>
+                    <input type="number" name="v_fy"></input>
+                    <input type="checkbox" for="v_fy" id="c-v_fy"></input>
+                    <br>
+                    <label class="math" for="y_max">y_{max}</label>
+                    <input type="number" name="y_max"></input>
+                    <input type="checkbox" for="y_max" id="c-y_max"></input>
+                    <br>
+                    <label class="math" for="y_o">y_{o}</label>
+                    <input type="number" name="y_o" value="0"></input>
+                    <input type="checkbox" for="y_o" id="c-y_o"></input>
+                </form>
+                <br>
+                <button onClick="solveVars()">Solve</button>
+                <br>
+                <br>
+                <button onclick="clearVars()" id="btnClear"></button>
+                <button onClick="cancelClearVars()" id="btnCancelClear" hidden>Cancel</button>
+            </div>
+        </div>
     </body>
 
     <script src="calc.js"></script>

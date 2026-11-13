@@ -62,32 +62,48 @@ for (let i = 0; i < VARS.length; i++) {
 }
 
 // add x and y position expressions
-graph.setExpression({id:"ex_pos_x",latex:"x_1(t)=v_o \\cos(\\Theta) t",hidden:true})
-graph.setExpression({id:"ex_pos_y",latex:"y_1(t)=y_o+v_o \\sin(\\Theta) t + \\frac{1}{2} g t^2",hidden:true})
+graph.setExpression({id:"ex_pos_x",latex:"x_1(t)=v_o \\cos(\\Theta) t",hidden:true});
+graph.setExpression({id:"ex_pos_y",latex:"y_1(t)=y_o+v_o \\sin(\\Theta) t + \\frac{1}{2} g t^2",hidden:true});
 // add plot for showing the movement of the object
 graph.setExpression({id:"ls_t",latex:"t_l=[0,0.05 \\ldots 10]"})
 graph.setExpression({
     id:"plt_pos",
     latex:"(x_1(t_l),y_1(t_l))",
     lines: true
-})
+});
 
 // add a point that shows where the object is at t (time)
 // need desmos variables for the x and y to make the label update
 graph.setExpression({
     id: "var_ct_x",
     latex:"c_x=x_1(t)"
-})
+});
 graph.setExpression({
     id: "var_ct_y",
     latex:"c_y=y_1(t)"
-})
+});
 graph.setExpression({
     id: "plt_ct",
     latex:"(c_x,c_y)",
     showLabel: true,
     label: "t: ${t}s | X: ${c_x} | Y: ${c_y}"
-})
+});
+
+// add the arrow and the variables used to define it
+graph.setExpression({
+    id: "var_va_x",
+    latex: "t_x=\\cos(\\Theta) v_o"
+});
+graph.setExpression({
+    id: "var_va_y",
+    latex: "t_y=\\sin(\\Theta) v_o + y_o"
+});
+graph.setExpression({
+    id: "plt_va",
+    latex: "(0,y_o),(t_x,t_y),(t_x-\\cos(\\Theta+45),t_y-\\sin(\\Theta+45)),(t_x,t_y),(t_x-\\cos(\\Theta-45),t_y-\\sin(\\Theta-45))",
+    points: false,
+    lines: true
+});
 
 // add a blank slot for users to type in
 // added because there is sometimes a bug that prevents new ones from being added
@@ -118,6 +134,19 @@ function toRadians(deg) {
     return deg * (Math.PI / 180);
 }
 
+// function for checking if a variable has an entered value or not
+function checkVar(name) {
+    let check = false;
+
+    if (document.getElementById("vars")[name]) {
+        if (document.getElementById("vars")[name].value) {
+            check = true;
+        }
+    }
+
+    return check;
+}
+
 // function for finding a specific variable
 function getVar(name) {
     let form = document.getElementById("vars");
@@ -146,12 +175,25 @@ function getVar(name) {
                 final = toDegrees(Math.atan(getVar("v_oy")/getVar("v_x")));
             }
             if (name == "v_x") {
-                // v_x = cos(theta)*v_o
-                final = Math.cos(toRadians(getVar("\\theta")))*getVar("v_o");
+                // base formula on what we have
+                if (checkVar("\\theta") && checkVar("v_o")) {
+                    // v_x = cos(theta)*v_o
+                    final = Math.cos(toRadians(getVar("\\theta")))*getVar("v_o");
+                } else if (checkVar("v_o") && checkVar("v_oy")) {
+                    // v_x = root(v_o^2-v_oy^2)
+                    final = Math.sqrt(getVar("v_o")**2-getVar("v_oy")**2);
+                }
             }
             if (name == "v_oy") {
-                // v_oy = sin(theta)*v_o
-                final = Math.cos(toRadians(getVar("\\theta")))*getVar("v_o");
+                // check what is availabe to determine the formula we will use
+
+                if (checkVar("\\theta") && checkVar("v_o")) {
+                    // v_oy = sin(theta)*v_o
+                    final = Math.cos(toRadians(getVar("\\theta")))*getVar("v_o");
+                } else if (checkVar("v_o") && checkVar("v_x")) {
+                    // v_oy = root(v_o^2-v_x^2)
+                    final = Math.sqrt(getVar("v_o")**2-getVar("v_x")**2);
+                }
             }
             if (name == "x") {
                 // x (final horizontal position) = v_x*t
@@ -168,6 +210,10 @@ function getVar(name) {
             if (name == "v_fy") {
                 // v_fy = v_oy + g * t
                 final = getVar("v_oy")+getVar("g")*getVar("t");
+            }
+            if (name == "y_max") {
+                // y_max = y_o + (v_oy^2)/2g
+                final = getVar("y_o")+((getVar("v_oy")**2)/(2*-getVar("g")));
             }
         }
     }
@@ -198,4 +244,42 @@ function solveVars() {
     for (let i = 0; i < SOLVES.length; i++) {
         form[SOLVES[i]].value = getVar(SOLVES[i]);
     }
+}
+
+// function that will clear the variables IF the user is sure
+const CLEAR_TEXT_1 = "Clear Variables";
+const CLEAR_TEXT_2 = "Confirm";
+const DEF_VARS = {
+    g: -9.8,
+    y_o: "0", // gets converted to a number. if it starts as a number, it gets ignored
+}
+function clearVars() {
+    let btn = document.getElementById("btnClear");
+    let btn2 = document.getElementById("btnCancelClear");
+    if (btn.textContent == CLEAR_TEXT_1) {
+        btn.textContent = CLEAR_TEXT_2;
+        btn2.hidden = false;
+    } else {
+        // go through the inputs in the form
+        let inputs = document.getElementById("vars").getElementsByTagName("input");
+        for (let i = 0; i < inputs.length; i++) {
+            // only if we don't have a default value for it
+            if (!DEF_VARS[inputs[i].name]) {
+                inputs[i].value = null;
+            } else {
+                inputs[i].value = DEF_VARS[inputs[i].name];
+            }
+        }
+        btn.textContent = CLEAR_TEXT_1;
+        btn2.hidden = true;
+    }
+}
+// set the button's first text
+document.getElementById("btnClear").textContent = CLEAR_TEXT_1;
+// cancel function
+function cancelClearVars() {
+    let btn = document.getElementById("btnClear");
+    let btn2 = document.getElementById("btnCancelClear");
+    btn.textContent = CLEAR_TEXT_1;
+    btn2.hidden = true;
 }
